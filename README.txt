@@ -1,38 +1,56 @@
 ~/.bash_login for Mac OS X
 by Quinn Weaver <quinn@fairpath.com>
 
-     The problem:
+    The problem:
 
 Mac OS X doesn't run ~/.bash_profile or ~/.bash_login until you actually run
 Terminal to start a shell.  This differs from the behavior of GNU/Linux,
-where your ~/.bash_login is run as soon as you log in successfully.
+where your these files are run as soon as you log in, even if you do so
+via X11.
 
-The GNU/Linux way is better, because it e.g. allows you to run a daemon when you
-log in (say, a non-privileged monotone server, or a Ruby on Rails Webrick
-app you're using).
+But what if you want to run a daemon when you log in (say, ssh-agent or
+gpg-agent, or a non-privileged monotone server, or a Ruby on Rails Webrick
+for a private version of an app?)
 
-     The solution:
+    The solution:
 
-AppleScript has a "do shell script" command.  So you can compile an
-AppleScript that will run your ~/.bash_login, then Control-click it in the
-Finder and choose "Open at Login."  Next time you log in, your ~/.bash_login
-will be run automatically.
+AppleScript has a "do shell script" command.  So you can compile an app
+that will run your ~/.bash_login, then Control-click it in the
+Finder and choose "Open at Login."
 
-     Manifest:
+    Installing:
 
+1) In the Finder, drag run_bash_login.app to your Dock.  This will make a Dock
+icon for it, while also keeping the original file.
 
+2) Right-click the Dock icon and select "Open at Login" from the options menu.
 
-So I created this file,
- then scripted an AppleScript script using Script Editor (script script).
- That script reads simply:
+3) You may then, if you wish, drag the icon off of the Dock and onto the
+desktop (where it will disappear in a puff of smoke).  Just remember where
+the original file was, because you'll need to copy it back to the Dock
+if you ever want to uninstall it.
 
-   do shell script "/Users/quinn/bin/.mac_os_login"
+    Uninstalling
 
- I used File > Save As to save the AppleScript as a compiled Cocoa app,
- making sure Stay Open was not checked.
- (I saved it as ~/bin/mac_os_x_login--applescript_wrapper.app.)
- Then I went to System Preferences > Accounts > Login Items, hit the + button,
- and added my little app (checking Hide).  I rebooted and, voila, it works.
+A) Drag the app to the Dock, if it's not already there.  See the instructions
+under 1), above.
+
+B) Right-click the Dock icon and look for "Open at Login" under options.
+It should have a checkbox.  If so, select it with your mouse, and the checkbox
+will go away.
+
+C) Drag the icon off of the Dock and onto the Desktop; this will make it
+disappear.
+
+D) If you wish, remove this directory.
+
+    Manifest:
+
+run_bash_login.scpt   the AppleScript source code.
+run_bash_login.app    the application bundle.
+README                this file
+Examples/             examples of commands you might want to put in your
+                      ~/.bash_login.
 
 Copyright (c) 2009, Quinn Weaver
 All rights reserved.
