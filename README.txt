@@ -1,24 +1,26 @@
 ~/.bash_login for Mac OS X
 by Quinn Weaver <quinn@fairpath.com>
 
-    The problem:
+    The problem
 
-Mac OS X doesn't run ~/.bash_profile or ~/.bash_login until you actually run
-Terminal to start a shell.  This differs from the behavior of GNU/Linux,
-where your these files are run as soon as you log in, even if you do so
-via X11.
+Mac OS X doesn't run ~/.bash_profile or ~/.bash_login, or ~/.profile until you
+actually run Terminal to start a shell.  This differs from the behavior of
+GNU/Linux, where your bash init file is run as soon as you log in, even if you
+do so via X11.
 
-But what if you want to run a daemon when you log in (say, ssh-agent or
-gpg-agent, or a non-privileged monotone server, or a Ruby on Rails Webrick
-for a private version of an app?)
+This is a problem if you want to run a daemon when you log in (say, ssh-agent
+or gpg-agent, or a or a Ruby on Rails Webrick for your private version of an
+app).
 
-    The solution:
+    The solution
 
-AppleScript has a "do shell script" command.  So you can compile an app
-that will run your ~/.bash_login, then Control-click it in the
-Finder and choose "Open at Login."
+I wrote an AppleScript wrapper that looks for ~/.bash_profile, ~/.bash_login,
+and ~/.profile and runs the first one that exists and is readable.
+That's what bash itself does on non-Mac systems.
 
-    Installing:
+You can set this AppleScript to run when you first log in.
+
+    Installing
 
 1) In the Finder, drag run_bash_login.app to your Dock.  This will make a Dock
 icon for it, while also keeping the original file.
@@ -44,13 +46,34 @@ disappear.
 
 D) If you wish, remove this directory.
 
-    Manifest:
+    Manifest
 
-run_bash_login.scpt   the AppleScript source code.
-run_bash_login.app    the application bundle.
-README                this file
-Examples/             examples of commands you might want to put in your
-                      ~/.bash_login.
+run_bash_login.applescript   the AppleScript source code.
+run_bash_login.app           the application bundle.
+README                       this file
+Examples/                    examples of commands you might want to put in your
+                             ~/.bash_login
+    Troubleshooting
+
+In the unlikely even that the script doesn't work, try the following:
+
+- Make sure your ~/.bash_profile (or ~/.bash_login, or ~/.profile)
+is readable by you: run Terminal and do chmod u+r ~/.bash_profile.
+
+- Add this line to the top of your ~/.bash_profile (or whatever):
+
+touch ~/Desktop/bash_file_ran
+
+Then double-click the app again.  If that file appears, then your bash file is
+running, after all.  Of course, the commands in your file could be
+failing…
+
+- Open the source file, run_bash_login.applescript, in the AppleScript Editor
+application, and press the Run button.  This should give you an informative
+message as to what's going wrong.
+
+- If you think there's something wrong with the app, please send me a bug
+report.
 
 Copyright (c) 2009, Quinn Weaver
 All rights reserved.
