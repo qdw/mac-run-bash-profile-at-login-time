@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Run 'gem server', if it's not already running.
+# (gem server runs a local server that makes all your gems' rdocs available at
+# http://localhost:8808/ .)
+if [[ ! $(ps aux | grep 'gem server' | grep -v grep) ]]; then
+    gem server >/dev/null 2>&1 &
+fi
+
+# Use gpg-agent (remembers my GPG password after the first time I enter it).
+# Code from gpg-agent(1).
+if test -f $HOME/.gpg-agent-info && \
+    kill -0 $(cut -d: -f 2 $HOME/.gpg-agent-info) 2>/dev/null; then
+    GPG_AGENT_INFO=$(cat $HOME/.gpg-agent-info)
+    export GPG_AGENT_INFO
+else
+    eval $(gpg-agent --daemon)
+    echo $GPG_AGENT_INFO >$HOME/.gpg-agent-info
+fi
+
+# Run Tracks (an open-source GTD web app) locally, if it's not already running.
+#if [[ ! $(p /home/quinn/tracks/script/server) ]]; then
+#    ~/tracks/script/server -e production & >/dev/null 2>&1
+#fi
+
+# Run the subversion server, if it's not already running.
+#if [[ ! $(p svnserve) ]]; then
+#    /usr/bin/svnserve -d -r ~/.subversion_repositories >/dev/null 2>&1
+#fi
