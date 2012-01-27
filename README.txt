@@ -4,46 +4,44 @@ by Quinn Weaver <quinn@fairpath.com>
 
     The problem
 
-Mac OS X doesn't run ~/.bash_profile or ~/.bash_login, or ~/.profile until you
-actually run Terminal to start a shell.  This differs from the behavior of
-GNU/Linux, where your bash init file is run as soon as you log in, even if you
-do so via X11.
+Mac OS X doesn't run ~/.bash_profile, ~/.profile, or ~/.bash_login until you
+actually run Terminal to start a shell. This behavior differs from that of
+most Unix operating systems.
 
-This is a problem if you want to run a daemon when you log in (say, ssh-agent
-or gpg-agent, or a or a Ruby on Rails Webrick for your private version of an
-app).
+That's a problem if you want to run a daemon when you log in (say, ssh-agent
+or gpg-agent).
 
     The solution
 
 I wrote an AppleScript wrapper that looks for ~/.bash_profile, ~/.bash_login,
-and ~/.profile and runs the first one that exists and is readable.
-That's what bash itself does on non-Mac systems.
+and ~/.profile and runs the first one that exists and is readable, in the
+same order as bash itself does for login shells.
 
 You can set this AppleScript to run when you first log in.
 
     Installing
 
-1) In the Finder, drag run_bash_login.app to your Dock.  This will make a Dock
+1) In the Finder, drag run_bash_login.app to your Dock. This will make a Dock
 icon for it, while also keeping the original file.
 
 2) Right-click the Dock icon and select "Open at Login" from the options menu.
 
-3) You may then, if you wish, drag the icon off of the Dock and onto the
-desktop (where it will disappear in a puff of smoke).  Just remember where
-the original file was, because you'll need to copy it back to the Dock
-if you ever want to uninstall it.
+3) You may then, if you wish, remove the icon from the Dock to save space.
+Just drag the icon off of the Dock and onto the Desktop (where it will
+disappear in a puff of smoke). Just remember where the original file was,
+because you'll need to copy it back to the Dock if you ever want to uninstall
+it.
 
     Uninstalling
 
-A) Drag the app to the Dock, if it's not already there.  See the instructions
+A) Drag the app to the Dock, if it's not already there. See the instructions
 under 1), above.
 
 B) Right-click the Dock icon and look for "Open at Login" under options.
-It should have a checkbox.  If so, select it with your mouse, and the checkbox
-will go away.
+If it has a checkbox, uncheck it.
 
-C) Drag the icon off of the Dock and onto the Desktop; this will make it
-disappear.
+C) Drag the icon off of the Dock and onto the Desktop, where it will
+disappear in a gratuitous animation.
 
 D) If you wish, remove this directory.
 
@@ -54,9 +52,9 @@ run_bash_login.app           the application bundle.
 README                       this file
 Examples/                    examples of commands you might want to put in your
                              ~/.bash_login
-    Troubleshooting
+    Debugging
 
-In the unlikely even that the script doesn't work, try the following:
+If the Applescript doesn't seem to work, try the following:
 
 - Make sure your ~/.bash_profile (or ~/.bash_login, or ~/.profile)
 is readable by you: run Terminal and do chmod u+r ~/.bash_profile.
@@ -66,15 +64,14 @@ is readable by you: run Terminal and do chmod u+r ~/.bash_profile.
 touch ~/Desktop/bash_file_ran
 
 Then double-click the app again.  If that file appears, then your bash file is
-running, after all.  Of course, the commands in your file could be
+running, after all. Of course, the commands in your file could be
 failing…
 
-- Open the source file, run_bash_login.applescript, in the AppleScript Editor
-application, and press the Run button.  This should give you an informative
+- Open the source file, run_bash_login.applescript in the AppleScript Editor
+application, and press the Run button. This should give you an informative
 message as to what's going wrong.
 
-- If you think there's something wrong with the app, please send me a bug
-report.
+- If it looks like a bug, please send me a bug report.
 
 Copyright (c) 2009, Quinn Weaver
 All rights reserved.

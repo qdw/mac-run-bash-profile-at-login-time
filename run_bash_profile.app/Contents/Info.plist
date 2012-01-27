@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>run_bash_login</string>
+	<string>run_bash_profile</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -36,7 +36,7 @@
 		<key>positionOfDivider</key>
 		<real>333</real>
 		<key>savedFrame</key>
-		<string>3 593 602 582 0 0 1920 1178 </string>
+		<string>24 570 602 582 0 0 1920 1178 </string>
 		<key>selectedTabView</key>
 		<string>result</string>
 	</dict>
