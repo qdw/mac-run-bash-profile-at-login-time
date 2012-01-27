@@ -1,4 +1,5 @@
-~/.bash_login for Mac OS X
+Running ~/.bash_profile at login time
+on Mac OS X
 by Quinn Weaver <quinn@fairpath.com>
 
     The problem
